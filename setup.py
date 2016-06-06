@@ -4,7 +4,7 @@ import datetime
 YEAR = datetime.date.today().year
 
 __author__ = "Manuel Huber"
-__version__ = "0.0.0"
+__version__ = "0.1.0"
 __copyright__ = "{0}, Manuel Huber. All rights reserved".format(YEAR)
 __docformat__ = "restructuredtext en"
 
