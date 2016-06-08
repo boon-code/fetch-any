@@ -25,6 +25,9 @@ setup( name = 'fetchany'
                      , "Programming Language :: Python :: 3"
                      ]
      , packages = ['fetchany']
+     , install_requires = [ "docopt==0.6.2"
+                          , "vcstools==0.1.38"
+                          ]
      , entry_points = {
            'console_scripts' :
                [ 'vcsf = fetchany.__init__:main'
