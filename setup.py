@@ -5,7 +5,6 @@ YEAR = datetime.date.today().year
 
 __author__ = "Manuel Huber"
 __version__ = "0.1.0"
-__copyright__ = "{0}, Manuel Huber. All rights reserved".format(YEAR)
 __docformat__ = "restructuredtext en"
 
 with open('fetchany/version.py', 'w') as f:
@@ -14,13 +13,12 @@ with open('fetchany/version.py', 'w') as f:
 
 setup( name = 'fetchany'
      , version = __version__
-     , description = 'Power-Off File System Test Suite'
-     , license = "Copyright (C) {0} Manuel Huber. All rights reserved".format(YEAR)
+     , description = 'Fetch multiple repositories (git, svn, hg, bzr, tar)'
      , author = __author__
      , author_email = 'Manuel.h87@gmail.com'
      , url = 'https://github.com/boon-code'
      , classifiers = [ "Development Status :: 2 - Pre-Alpha"
-                     ,"License :: Copyright (C) {0} Manuel Huber".format(YEAR)
+                     , "License :: OSI Approved :: MIT License"
                      , "Programming Language :: Python :: 2.7"
                      , "Programming Language :: Python :: 3"
                      ]
