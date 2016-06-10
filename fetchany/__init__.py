@@ -92,6 +92,9 @@ Examples:
             key = 'path' # normalize key
         elif key == 'shallow':
             value = util.isTextYes(value)
+        elif key in ('clean', 'force-clean'):
+            key = 'force-clean'
+            value = util.isTextYes(value)
         else:
             self._log.error("Unknown option '{0}'".format(key))
             return False

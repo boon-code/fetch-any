@@ -1,4 +1,5 @@
 import os
+import shutil
 import logging
 import threading
 import vcstools
@@ -25,7 +26,12 @@ class Fetcher(threading.Thread):
                 spec = self._qin.get(False)
                 co_path = os.path.join(self._workdir, spec['path'])
                 c = vcstools.get_vcs_client(spec['type'], co_path)
-                if c.detect_presence():
+                repo_exists = c.detect_presence()
+                if repo_exists and spec.get('force-clean', False):
+                    self._log.info("{type}: Force clean path: {0}".format(co_path, **spec))
+                    shutil.rmtree(co_path)
+                    repo_exists = False
+                if repo_exists:
                     op = "Updating"
                     self._log.debug("{type}: Updating {0} (url={fetch})".format(co_path, **spec))
                     ret = c.update(version=spec.get('revision', ''),
