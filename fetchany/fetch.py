@@ -44,7 +44,8 @@ class Fetcher(threading.Thread):
                                     shallow=spec.get('shallow', False))
                 self._qin.task_done()
                 if ret:
-                    self._log.debug("{type}: {0} path '{path}' succeeded".format(op, **spec))
+                    spec['co_revision'] = c.get_version()
+                    self._log.debug("{type}: {0} path '{path}' to {co_revision} succeeded".format(op, **spec))
                 if not ret:
                     self._log.debug("{type}: {0} path '{path}' failed: {1}".format(op, ret, **spec))
                     self.failed.append(spec)
