@@ -55,7 +55,7 @@ Options:
   -j, --jobs=<jobs>         Number of parallel jobs [default: 1].
   --version                 Show version.
   -c, --config=<config>     Configuration file for fetching.
-  -w, --workdir=<workdir>   Working directory where to checkout (base path)
+  -w, --workdir=<workdir>   Working directory where to checkout (base path) [default: .].
   -s, --shallow             Don't clone entire history
 
 ----
