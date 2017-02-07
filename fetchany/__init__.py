@@ -9,12 +9,16 @@ import sys
 import os
 import re
 import logging
-import urlparse
 import traceback
 import vcstools
 import docopt
 from . import util
 from . import fetch
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 try:
     import queue
@@ -141,11 +145,11 @@ Examples:
     def _setPath(self, spec):
         fetch_url = spec['fetch']
         extra = ''
-        if not spec.has_key('path'):
+        if 'path' not in spec:
             if spec['type'] == 'git':
                 fetch_url = util.rstripText(fetch_url, '.git')
             self._log.debug("Fetch url={0}".format(fetch_url))
-            url = urlparse.urlparse(fetch_url)
+            url = urlparse(fetch_url)
             # (more or less) sane default path
             spec['path'] = url.path
             extra = '(default) '
