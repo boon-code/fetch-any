@@ -46,9 +46,8 @@ info:
 env/bin/activate: requirements.txt
 	( \
                 [ -d "env" ] || $(VENV_CREATE); \
-                cp requirements.txt requirements.tmp; \
-                $(VENV_PREP) $(PIP) install -r requirements.tmp; \
-                rm requirements.tmp; \
+                $(VENV_PREP) $(PIP) install -r requirements.txt; \
+                touch env/bin/activate; \
 	)
 
 prepare: $(VENV_DEP)
@@ -78,5 +77,6 @@ uninstall: $(VENV_DEP)
 
 .PHONY: clean
 clean:
-	rm -rf ./build ./dist *.egg-info ./env requirements.tmp && \
-                find . -name "__pycache__" -type d -exec rm -r "{}" \;
+	rm -rf ./build ./dist *.egg-info ./env && \
+                find . -name "__pycache__" -type d -exec rm -r "{}" \; && \
+		find . -name "*.pyc" -exec rm "{}" \;
