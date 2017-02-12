@@ -235,12 +235,19 @@ Examples:
                 self._log.info("Skipping unknown repoistory specification (line {1}): '{0}'".format(line, lnum))
         return self.fetch(repos)
 
+    def _get_version(self):
+        import pkg_resources
+        return pkg_resources.require("fetchany")[0].version
+
     def _run_command(self, p):
         self._log.debug(p)
         self._jobs = int(p.get('--jobs', 1))
         self._workdir = p.get('--workdir', '.')
         self._default_shallow_clone = p.get('--shallow', False)
-        if p.get('fetch', False):
+        if p.get('--version', False):
+            sys.stdout.write("Fetch Any v{0}\n".format(self._get_version()))
+            return True
+        elif p.get('fetch', False):
             return self.fetch(p['<repos>'])
         elif p.get('--config', False) and p['--config'] != '-':
             with open(p['--config'], 'r') as f:
