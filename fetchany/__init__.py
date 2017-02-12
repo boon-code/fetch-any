@@ -214,9 +214,10 @@ Examples:
             self._log.info("Starting fetching {0} item(s) using {1} process(es)".format(len(parsed_repos), self._jobs))
             for i in parsed_repos:
                 self._log.debug("Repo: type={type}, url={fetch}, path={path}".format(**i))
-            self._fetch(parsed_repos)
+            return self._fetch(parsed_repos)
         else:
             self._log.warning("No repositories have been fetched")
+            return False
 
     def fetchFromFile(self, f):
         """ Fetch all repositories from text file
@@ -245,7 +246,7 @@ Examples:
             with open(p['--config'], 'r') as f:
                 return self.fetchFromFile(f)
         else:
-            self.fetchFromFile(sys.stdin)
+            return self.fetchFromFile(sys.stdin)
 
     def run(self, argv):
         try:
@@ -254,15 +255,21 @@ Examples:
             self._log.debug("Parsing arguments failed!")
             raise
         try:
-            self._run_command(p)
+            success = self._run_command(p)
+            if success:
+                return 0
+            else:
+                return 1
         except Exception as e:
             trace = traceback.format_exc()
             self._log.critical("Exception: {0}\nStack-Trace:\n{1}".format(str(e), trace))
+            return 1
 
 
 def main():
     app = FetcherApp()
-    app.run(sys.argv[1:])
+    rc = app.run(sys.argv[1:])
+    sys.exit(rc)
 
 
 if __name__ == '__main__':
