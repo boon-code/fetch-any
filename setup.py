@@ -19,9 +19,7 @@ setup( name = 'fetchany'
                      , "Programming Language :: Python :: 3"
                      ]
      , packages = ['fetchany']
-     , setup_requires = [ "setuptools>=8.0"
-                        , "setuptools-git-version>=1.0.3"
-                        ]
+     , setup_requires = ["setuptools-git-version>=1.0.3"]
      , install_requires = [ "docopt==0.6.2"
                           , "vcstools==0.1.38"
                           ]
